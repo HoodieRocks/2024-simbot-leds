@@ -1,7 +1,10 @@
 package frc.robot.utils;
 
+import javax.lang.model.util.ElementScanner14;
+
 import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
+import edu.wpi.first.wpilibj.simulation.ElevatorSim;
 
 public class LEDs {
     private final AddressableLED led;
@@ -29,6 +32,7 @@ public class LEDs {
         ENZO,
         JOSH,
         JOSH_GLASSES,
+        Gabers,
         SARAH,;
 
         public LEDStates previous() {
@@ -49,12 +53,20 @@ public class LEDs {
         var time = System.currentTimeMillis();
         switch (this.ledState){
             case ENZO:
+            
                 break;
             case JOSH:
                 break;
             case JOSH_GLASSES:
                 for (int i =0; i < buffer.getLength(); i++ ){
-                    
+                    int calculated = i+(int)time/500;
+                    if(calculated%2==0){
+                        //orange
+                        buffer.setRGB(i, 255, 165, 0);
+                    }else{
+                        //torquoise
+                        buffer.setRGB(i, 48, 213, 200);
+                    }
                 }
                 break;
             case PARKER:
@@ -68,6 +80,37 @@ public class LEDs {
                 }
                 break;
             case SARAH:
+            for (int i = 0; i < buffer.getLength(); i++) {
+                if (i%2==0){
+                    // Celadon
+                    buffer.setRGB (i, 175, 225, 175);
+                } else {
+                    // iris
+                    if (time%500 < 250)
+                        buffer.setRGB(i, 93, 63, 211);
+                    else
+                        buffer.setRGB(i, 0, 0, 0);
+                }}
+                break;
+        
+            case Gabers:
+            for (int i = 0; i < buffer.getLength(); i++) {
+                if (i%2==0){ 
+
+                    buffer.setRGB(i, 0, 0, 128);
+                }else{ 
+                    if (time%100 < 10)
+                        buffer.setRGB(i, 176, 196, 222);
+                    else  
+                        buffer.setRGB(i, 25 , 25, 112);
+
+                }
+                
+
+
+
+            }
+            
                 break;
             default:
                 break;
